@@ -20,11 +20,18 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class FollowSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
+
     following = serializers.SlugRelatedField(queryset=User.objects.all(),
                                              slug_field='username')
     class Meta:
         fields = ('user', 'following')
         model = Follow
+        validators = [
+            serializers.UniqueTogetherValidator(
+                queryset=Follow.objects.all(),
+                fields=['following']
+            )
+        ]
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:

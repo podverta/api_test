@@ -111,24 +111,27 @@ class APIFollow(viewsets.ModelViewSet):
         queryset = Follow.objects.all()
         serializer_class = FollowSerializer
         filter_backends = [filters.SearchFilter]
-        search_fields = ['user__username', ]
+        search_fields = ['user__username', 'following__username']
 
-        def list(self, request, *args, **kwargs):
-            queryset = Follow.objects.filter(following__username=request.user)
-            serializer_class = FollowSerializer(queryset, many=True)
-            return Response(serializer_class.data, status=status.HTTP_200_OK)
+        # def list(self, request, *args, **kwargs):
+        #     queryset = Follow.objects.all()
+        #     serializer_class = FollowSerializer(queryset, many=True)
+        #     return Response(serializer_class.data, status=status.HTTP_200_OK)
+        def perform_create(self, serializer):
+            if serializer.is_valid():
+                serializer.save(user=self.request.user)
 
-
-        def create(self, request):
-            serializer_class = FollowSerializer(data=request.data)
-            if request.user.is_authenticated == True:
-                if serializer_class.is_valid():
-                    serializer_class.save(user=request.user)
-                    return Response(serializer_class.data,
-                                    status=status.HTTP_201_CREATED)
-                return Response(serializer_class.errors,
-                                status=status.HTTP_400_BAD_REQUEST)
-            return Response(status=status.HTTP_403_FORBIDDEN)
+        # def create(self, request):
+        #     serializer_class = FollowSerializer(data=request.data)
+        #     if request.user.is_authenticated == True:
+        #         if serializer_class.is_valid():
+        #
+        #             serializer_class.save(user=request.user)
+        #             return Response(serializer_class.data,
+        #                             status=status.HTTP_201_CREATED)
+        #         return Response(serializer_class.errors,
+        #                         status=status.HTTP_400_BAD_REQUEST)
+        #     return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class APIGroup(generics.ListCreateAPIView):

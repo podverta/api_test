@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'api',
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [
@@ -31,7 +32,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'yatube_api.urls'
+ROOT_URLCONF = 'main_app.urls'
 
 TEMPLATES = [
     {
@@ -49,7 +50,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'yatube_api.wsgi.application'
+WSGI_APPLICATION = 'main_app.wsgi.application'
 
 DATABASES = {
     'default': {

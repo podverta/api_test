@@ -1,14 +1,44 @@
 from rest_framework import viewsets, status, filters, generics, mixins
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Post, Comment, Follow, Group
+from .models import Post, Comment, Follow, Group, Client, Message, Mail, Tag
 from .serializers import  (
     PostSerializer,
     CommentSerializer,
     FollowSerializer,
-    GroupSerializer
+    GroupSerializer,
+    MessageSerializer,
+    MailSerializer,
+    TagSerializer,
+    ClientSerializer
 )
 from django.shortcuts import get_object_or_404
+
+
+class MessageViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['status', ]
+    # def create(self, request):
+    #     serializer = MessageSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MailViewSet(viewsets.ModelViewSet):
+    queryset = Mail.objects.all()
+    serializer_class = MailSerializer
+
+class ClientViewSet(viewsets.ModelViewSet):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()

@@ -1,6 +1,32 @@
 from rest_framework import serializers
 
-from .models import Post, Comment, Follow, Group, User
+from .models import Post, Comment, Follow, Group, User, Message, Mail, Client, Tag
+
+class MessageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = Message
+
+class MailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = Mail
+
+class ClientSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = Client
+
+
+class TagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = Tag
+
 
 
 class PostSerializer(serializers.ModelSerializer):

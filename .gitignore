@@ -1,7 +1,9 @@
 .git/*
 env/
 venv/
+new_venv/
 .venv/
+.new_venv/
 migrations/
 
 __pycache__/

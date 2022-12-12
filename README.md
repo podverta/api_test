@@ -11,7 +11,7 @@ python3 -m venv venv
 ```
 3. Активировать окружение:
 ```
-source\venv\bin\activate
+source venv/bin/activate
 ```
 4. В корневом каталоге в файле .env добавить ваш токен TOKEN_API='<токен>'
 5. Установить зависимости:

@@ -7,7 +7,7 @@ https://github.com/podverta/api_test.git
 ```
 2. Перейти в директорию и создать виртуальное окружение:
 ```
-python3 -m venv venv
+python -m venv venv
 ```
 3. Активировать окружение:
 ```
